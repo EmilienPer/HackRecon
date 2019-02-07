@@ -10,7 +10,7 @@
    * [Example](#example)
    * [Issues management](#issues-management)
  
-##Discovery
+## Discovery
 Discovery was created to be used for OSP certification.
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.
 Its mechanism can be summarized as follows:
@@ -23,17 +23,17 @@ Its mechanism can be summarized as follows:
     *  Start scans according to the protocol
     * Suggest additional scans asking for human intervention or other exploits
 - Write an analysis report (HTML and XML format)
-##Requirement
+## Requirement
 Discovery run on Python 2.7 can't work correctly without the following tools
 - Nmap           
 - smtp-user-enum 
 - whatweb        
 - nikto          
 - dirb     
-##Installation
+## Installation
 
-##Usage
+## Usage
 
-##Example
+## Example
 
-##Issues management
+## Issues management
