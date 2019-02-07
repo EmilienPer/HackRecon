@@ -13,7 +13,7 @@
 #        |    :: :  :   :    :: : :     :: :: :   : :  :      :      : :: ::    :   : :     :         |
 #        ----------------------------------------------------------------------------------------------
 __author__ = "Emilien Peretti"
-__version__ = "1.0"
+__version__ = "1.1"
 __doc__ = """
 Discovery was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible 

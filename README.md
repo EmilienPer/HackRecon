@@ -12,6 +12,8 @@
    * [Issues management](#issues-management)
   
 ## Discovery
+Project URL : https://github.com/EmilienPer/Discovery
+
 Discovery was created to be used for OSP certification.
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.
 Its mechanism can be summarized as follows:
