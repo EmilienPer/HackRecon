@@ -1,7 +1,7 @@
 
 | Shortcut | option | Required | Default | Description |
 | -------- | ------ | -------- | ------- | ----------- |
-| |  <ips>    | V | | The Ip(s) address of the host |
+| |  <ips>    | X | | The Ip(s) address of the host |
 | -o | --output |  | .|The output directory|
 | -t | --max_threads | |5 |  The maximum number of host handled in the same time |
 | | --cache |  | False |Use cache |
