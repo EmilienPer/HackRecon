@@ -12,28 +12,30 @@
 #        |     :::: ::   ::  :::: ::    ::: :::  ::::: ::    ::::     :: ::::  ::   :::     ::        |
 #        |    :: :  :   :    :: : :     :: :: :   : :  :      :      : :: ::    :   : :     :         |
 #        ----------------------------------------------------------------------------------------------
-# Author: Emilien Peretti
-# Version: 1.0
-# Description:
-#              Discovrey was created to be used for OSP certification.
-#              This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible
-#              to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.
-#              Its mechanism can be summarized as follows:
-#                   For each host:
-#                        - Create the exploit, proof and scan folders required for OSCP certification
-#                        - Determine open ports and related services
-#                        - For each port:
-#                           * List exploits related to the product using the port
-#                           * Start scans according to the protocol
-#                           * suggest additional scans asking for human intervention or other exploits
-#                        - Write an analysis report (HTML and XML format)
-# Required tools (the following tools are called by discovery):
-#                   - Nmap
-#                   - smtp-user-enum
-#                   - whatweb
-#                   - nikto
-#                   - dirb
-
+__author__ = "Emilien Peretti"
+__version__ = "1.0"
+__doc__ = """
+Discovery was created to be used for OSP certification.                                                  
+This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible 
+to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.   
+Its mechanism can be summarized as follows:                                                              
+     For each host:                                                                                      
+          - Create the exploit, proof and scan folders required for OSCP certification                   
+          - Determine open ports and related services                                                    
+          - For each port:                                                                               
+             * List exploits related to the product using the port                                       
+             * Start scans according to the protocol                                                     
+             * suggest additional scans asking for human intervention or other exploits                  
+          - Write an analysis report (HTML and XML format)                                               
+"""
+__examples__ = ["discovery 192.168.0.1 -o /root/",
+                "discovery 192.168.0.0/24 -o /root/",
+                "discovery 192.168.0.1-254 -o /root/"
+                "discovery 192.168.0.1;198.162.0.2 -o /root/",
+                "discovery 192.168.0.1 -o /root/ -t 5 --cache --all ",
+                "discovery 192.168.0.1 -o /root/ --javascript_header javascript_"
+                "file.js --javascript_tail other_file.js --css shett.css"
+                ]
 
 import argparse
 import logging

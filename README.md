@@ -6,6 +6,7 @@
    * [Discovery](#discovery)
    * [Requirement](#requirement)
    * [Installation](#installation)
+   * [Options](#options)
    * [Usage](#usage)
    * [Example](#example)
    * [Issues management](#issues-management)
@@ -31,6 +32,10 @@ Discovery run on Python 2.7 can't work correctly without the following tools
 - nikto          
 - dirb     
 ## Installation
+`sudo pip install discovery`
+
+## Options
+
 
 ## Usage
 
