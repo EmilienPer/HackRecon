@@ -1,0 +1,12 @@
+site_name: "Discovery"
+repo_url: https://github.com/EmilienPer/discovery
+site_author: EmilienPer
+docs_dir: doc
+pages:
+  - Introduction: index.md
+  - Installation: install.md
+  - Usage: usage.md
+  - Reporting: report.md
+extra:
+  mailto: code@emilienperetti.be
+theme: readthedocs
