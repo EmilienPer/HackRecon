@@ -1,4 +1,4 @@
-setuptools==39.0.1
-enlighten==1.1.0
-lxml==4.3.0
-netaddr==0.7.19
+setuptools
+enlighten
+lxml
+netaddr

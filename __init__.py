@@ -1,1 +1,1 @@
-name = "discovery"
+name = "hack_discovery"

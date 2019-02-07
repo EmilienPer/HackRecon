@@ -10,9 +10,9 @@ with open("README.md", "r") as fh:
 
 requirements = parse_requirements("requirements.txt", session=False)
 setup(
-  name = "discovery",
+  name = "hackrecon",
   packages = find_packages(),
-  version = "1.1",
+  version = "1.1.2",
   description = "Reconnaissance tool",
   author = "Emilien Peretti",
   author_email = "code@emilienperetti.be",

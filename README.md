@@ -1,9 +1,9 @@
-[![Documentation Status](https://readthedocs.org/projects/discovery-tool/badge/?version=latest)](https://discovery-tool.readthedocs.io/en/latest/?badge=latest)
-[![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/Discovery/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/Discovery?targetFile=requirements.txt)
+[![Documentation Status](https://readthedocs.org/projects/hackrecon/badge/?version=latest)](https://hackrecon.readthedocs.io/en/latest/?badge=latest)
+[![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/HackRecon/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/HackRecon?targetFile=requirements.txt)
 [![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.me/EmilienPer)
-[![Beerpay](https://beerpay.io/EmilienPer/Discovery/badge.svg?style=plastic)](https://beerpay.io/EmilienPer/Discovery)
+[![Beerpay](https://beerpay.io/EmilienPer/HackRecon/badge.svg?style=plastic)](https://beerpay.io/EmilienPer/HackRecon)
 ## Table of Contents
-   * [Discovery](#discovery)
+   * [HackRecon](#hackrecon)
    * [Requirement](#requirement)
    * [Installation](#installation)
    * [Options](#options)
@@ -11,10 +11,10 @@
    * [Example](#example)
    * [Issues management](#issues-management)
   
-## Discovery
-Project URL : https://github.com/EmilienPer/Discovery
+## HackRecon
+Project URL : https://github.com/EmilienPer/HackRecon
 
-Discovery was created to be used for OSP certification.
+HackRecon was created to be used for OSP certification.
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.
 Its mechanism can be summarized as follows:
 
@@ -27,14 +27,14 @@ Its mechanism can be summarized as follows:
     * Suggest additional scans asking for human intervention or other exploits
 - Write an analysis report (HTML and XML format)
 ## Requirement
-Discovery run on Python 2.7 can't work correctly without the following tools
+HackRecon run on Python 2.7 can't work correctly without the following tools
 - Nmap           
 - smtp-user-enum 
 - whatweb        
 - nikto          
 - dirb     
 ## Installation
-`sudo pip install discovery`
+`sudo pip install hackrecon`
 
 ## Options
 | Shortcut | option | Required | Default | Description |
@@ -54,13 +54,13 @@ The <ips> param can be
 - A list of IPv4 address separated by ";" (example: 192.168.0.1;198.162.0.2)
 
 Example:
-* `discovery 192.168.0.1 -o /root/`,
-* `discovery 192.168.0.0/24 -o /root/`
-* `discovery 192.168.0.1-254 -o /root/`
-* `discovery 192.168.0.1;198.162.0.2 -o /root/`
-* `discovery 192.168.0.1 -o /root/ -t 5 --cache --all `
-* `discovery 192.168.0.1 -o /root/ --javascript_header javascript_file.js --javascript_tail other_file.js --css shett.css`
+* `hackrecon 192.168.0.1 -o /root/`,
+* `hackrecon 192.168.0.0/24 -o /root/`
+* `hackrecon 192.168.0.1-254 -o /root/`
+* `hackrecon 192.168.0.1;198.162.0.2 -o /root/`
+* `hackrecon 192.168.0.1 -o /root/ -t 5 --cache --all `
+* `hackrecon 192.168.0.1 -o /root/ --javascript_header javascript_file.js --javascript_tail other_file.js --css shett.css`
 ## Example
 Example of usage can be found in the "examples" directory
 ## Issues management 
-For contributions or suggestions, please [open an Issue](https://github.com/EmilienPer/Discovery/issues/new) and clearly explain, using an example or a use case if appropriate. 
+For contributions or suggestions, please [open an Issue](https://github.com/EmilienPer/HackRecon/issues/new) and clearly explain, using an example or a use case if appropriate. 
