@@ -36,6 +36,7 @@ __examples__ = ["discovery 192.168.0.1 -o /root/",
                 "discovery 192.168.0.1 -o /root/ --javascript_header javascript_"
                 "file.js --javascript_tail other_file.js --css shett.css"
                 ]
+
 import argparse
 import logging
 import os
