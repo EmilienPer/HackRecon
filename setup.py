@@ -12,7 +12,7 @@ requirements = parse_requirements("requirements.txt", session=False)
 setup(
   name = "hackrecon",
   packages = find_packages(),
-  version = "1.1.3",
+  version = "1.1.5",
   description = "Reconnaissance tool",
   author = "Emilien Peretti",
   author_email = "code@emilienperetti.be",
@@ -20,5 +20,5 @@ setup(
   install_requires=[str(r.req) for r in requirements],
   long_description=long_description,
   long_description_content_type="text/markdown",
-
+  scripts=['hackrecon'],
 )
