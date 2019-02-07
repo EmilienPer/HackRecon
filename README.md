@@ -1,7 +1,7 @@
 [![Documentation Status](https://readthedocs.org/projects/hackrecon/badge/?version=latest)](https://hackrecon.readthedocs.io/en/latest/?badge=latest)
-[![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/HackRecon/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/HackRecon?targetFile=requirements.txt)
+[![Known Vulnerabilities](https://snyk.io/test/github//badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/?targetFile=requirements.txt)
 [![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.me/EmilienPer)
-[![Beerpay](https://beerpay.io/EmilienPer/HackRecon/badge.svg?style=plastic)](https://beerpay.io/EmilienPer/HackRecon)
+[![Beerpay](https://beerpay.io/EmilienPer/HackRecon/badge.svg?style=flat)](https://beerpay.io/EmilienPer/HackRecon)
 ## Table of Contents
    * [HackRecon](#hackrecon)
    * [Requirement](#requirement)
