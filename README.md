@@ -10,7 +10,7 @@
    * [Usage](#usage)
    * [Example](#example)
    * [Issues management](#issues-management)
- 
+  
 ## Discovery
 Discovery was created to be used for OSP certification.
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre) makes it possible to scan hosts finally to obtain a maximum of information on these. It is therefore a recognition tool.
