@@ -60,5 +60,5 @@ Example:
 * `discovery 192.168.0.1 -o /root/ --javascript_header javascript_file.js --javascript_tail other_file.js --css shett.css`
 ## Example
 Example of usage can be found in the "examples" directory
-## Issues management
+## Issues management 
 For contributions or suggestions, please [open an Issue](https://github.com/EmilienPer/Discovery/issues/new) and clearly explain, using an example or a use case if appropriate. 
