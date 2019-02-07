@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/EmilienPer/Discovery.svg?branch=master)](https://travis-ci.org/EmilienPer/Discovery)
 [![Documentation Status](https://readthedocs.org/projects/discovery-tool/badge/?version=latest)](https://discovery-tool.readthedocs.io/en/latest/?badge=latest)
 [![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/Discovery/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/Discovery?targetFile=requirements.txt)
 [![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.me/EmilienPer)
