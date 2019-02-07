@@ -1,6 +1,5 @@
-[![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/OSCP-scripts/badge.svg?targetFile=discovery%2Frequirements.txt)](https://snyk.io/test/github/EmilienPer/OSCP-scripts?targetFile=discovery%2Frequirements.txt)
-[![Documentation Status](https://readthedocs.org/projects/oscp-scripts/badge/?version=latest)](https://oscp-scripts.readthedocs.io/en/latest/?badge=latest)
-[![Beerpay](https://img.shields.io/beerpay/hashdog/scrapfy-chrome-extension.svg)](https://beerpay.io/EmilienPer/OSCP-scripts)
+[![Documentation Status](https://readthedocs.org/projects/discovery-tool/badge/?version=latest)](https://discovery-tool.readthedocs.io/en/latest/?badge=latest)
+[![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/Discovery/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/Discovery?targetFile=requirements.txt)
 [![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.me/EmilienPer)
-
+[![Beerpay](https://beerpay.io/EmilienPer/Discovery/badge.svg?style=plastic)](https://beerpay.io/EmilienPer/Discovery)
 ## Table of Contents
