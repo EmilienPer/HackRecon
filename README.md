@@ -37,3 +37,5 @@ Discovery run on Python 2.7 can't work correctly without the following tools
 ## Example
 
 ## Issues management
+ 
+For contributions or suggestions, please [open an Issue](https://github.com/EmilienPer/Discovery/issues/new) and clearly explain, using an example or a use case if appropriate. 
