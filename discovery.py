@@ -980,14 +980,14 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output', help='The output directory', dest="out", default=".")
     parser.add_argument('-t', '--max_threads', help='The maximum number of host handled in the same time',
                         dest="max_threads", default=5)
-    parser.add_argument('--css', help='The CSS file to use', dest="css", default=None)
-    parser.add_argument('--javascript_header', help='The javascript file to use in the header', dest="javascript_h",
+    parser.add_argument('--css', help='The CSS file to use into the HTML report', dest="css", default=None)
+    parser.add_argument('--javascript_header', help='The javascript file to use into the header', dest="javascript_h",
                         default=None)
-    parser.add_argument('--javascript_tail', help='The javascript file to use in the end of the html',
+    parser.add_argument('--javascript_tail', help='The javascript file to use into the end of the html',
                         dest="javascript_t",
                         default=None)
     parser.add_argument("--cache", action='store_true', help='Use cache', dest="cache", default=False)
-    parser.add_argument('-a', "--all", action='store_true', help='Scan all port', dest="ports", default=False)
+    parser.add_argument('-a', "--all", action='store_true', help='Scan all ports', dest="ports", default=False)
     args = parser.parse_args()
     # Configuration
     print ("The result will be stored in : {}".format(os.path.abspath(args.out)))

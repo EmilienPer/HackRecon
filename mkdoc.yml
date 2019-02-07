@@ -6,6 +6,7 @@ pages:
   - Introduction: index.md
   - Installation: install.md
   - Usage: usage.md
+  - Options: options.md
   - Reporting: report.md
 extra:
   mailto: code@emilienperetti.be

@@ -35,12 +35,30 @@ Discovery run on Python 2.7 can't work correctly without the following tools
 `sudo pip install discovery`
 
 ## Options
-
-
+| Shortcut | option | Required | Default | Description |
+| -------- | ------ | -------- | ------- | ----------- |
+| |  <ips>    | V | | The Ip(s) address of the host |
+| -o | --output |  | .|The output directory|
+| -t | --max_threads | |5 |  The maximum number of host handled in the same time |
+| | --cache |  | False |Use cache |
+| -a | --all |  | False|Scan all ports | 
+| | --css |  | |The CSS file to use into the HTML report| 
+| | --javascript_header |  | |  The javascript file to use into the header of the HTML report | 
+| | --javascript_tail |  | |  The javascript file to use into  the end of the HTML report |
 ## Usage
+The <ips> param can be 
+- An IPv4 address (example: 192.168.0.1)
+- An range of IPv4 addresses (example: 192.168.0.0/24 or 192.168.0.1-254)
+- A list of IPv4 address separated by ";" (example: 192.168.0.1;198.162.0.2)
 
+Example:
+* `discovery 192.168.0.1 -o /root/`,
+* `discovery 192.168.0.0/24 -o /root/`
+* `discovery 192.168.0.1-254 -o /root/`
+* `discovery 192.168.0.1;198.162.0.2 -o /root/`
+* `discovery 192.168.0.1 -o /root/ -t 5 --cache --all `
+* `discovery 192.168.0.1 -o /root/ --javascript_header javascript_file.js --javascript_tail other_file.js --css shett.css`
 ## Example
-
+Example of usage can be found in the "examples" directory
 ## Issues management
- 
 For contributions or suggestions, please [open an Issue](https://github.com/EmilienPer/Discovery/issues/new) and clearly explain, using an example or a use case if appropriate. 
