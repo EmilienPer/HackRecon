@@ -1,1 +1,0 @@
-name = "hack_discovery"

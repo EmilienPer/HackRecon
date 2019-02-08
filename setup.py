@@ -12,13 +12,15 @@ requirements = parse_requirements("requirements.txt", session=False)
 setup(
   name = "hackrecon",
   packages = find_packages(),
-  version = "1.1.5",
+  version = "1.2.1",
   description = "Reconnaissance tool",
   author = "Emilien Peretti",
   author_email = "code@emilienperetti.be",
-  url = "https://github.com/EmilienPer/OSCP-scripts/tree/master/discovery",
+  url = "https://github.com/EmilienPer/HackRecon",
   install_requires=[str(r.req) for r in requirements],
   long_description=long_description,
   long_description_content_type="text/markdown",
-  scripts=['hackrecon'],
+  entry_points={
+        'console_scripts': ['hackrecon=hackrecon.hackrecon:main_with_args'],
+    }
 )
