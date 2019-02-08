@@ -8,6 +8,9 @@
 #        |  |_| |_|\__,_|\___|_|\_\_| \_\___|\___\___/|_| |_| |
 #        |                                                    |
 #        ------------------------------------------------------
+# Version 1.6
+# ------------
+#   -Add full protocol nmap scan
 # Version 1.5
 # -----------
 #   - Change SMB script command
@@ -26,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.5.3"
+__version__ = "1.6"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -76,7 +79,7 @@ SMTP_CMD = "smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top_shortlis
            " -t {} -p {}|grep Exists"
 
 
-NMAP_SMB_CMD = "nmap -sV -Pn -vv -p {} --script=smb-* -oA '{}' {}"
+FULL_NMAP_CMD = "nmap -sV -Pn -vv -p {} --script={}* -oA '{}' {}"
 
 NMAP_SMB_VULN_CMD = "nmap -sV -Pn -vv -p {} --script=smb-vuln* --script-args=unsafe=1 -oA '{}' {}"
 
@@ -100,7 +103,7 @@ JAVASCRIPT_HEADER = None
 JAVASCRIPT_TAIL = None
 BAR_MANAGER = enlighten.get_manager()
 processes = []
-
+FULL=[]
 
 # ------------------------------------------ common functions ----------------------------------------------------------
 class GenericThread(Thread):
@@ -570,14 +573,37 @@ def scan_http(ip_address, port_tree, base):
     prefix = "https://" if (method == "https" or method == "http/s") else "http://"
     port = get_port_from_port_tree(port_tree)
     url = "{}{}:{}/".format(prefix, ip_address, port)
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base,"http"))
     thread_nikto = GenericThread(function=nikto, arguments=(ip_address, port_tree, base, url))
     thread_dirb = GenericThread(function=scan_dirb, arguments=(ip_address, port_tree, base, url, port))
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "http"))
+    thread_full.start()
     thread_nikto.start()
     thread_dirb.start()
     thread_nikto.join()
     thread_dirb.join()
+    thread_full.join()
 
-
+def full_nmap_scan(ip_address, port_tree, base,protocol):
+    """
+    Use all script nse of nmap for the port
+    :param ip_address: the target ip address
+    :param port_tree: the xml port tree of the port to use into the nikto scan
+    :param base: the base directory to store the result of the scan
+    :param protocol: the protocol name
+    :return:
+    """
+    if protocol in FULL or "all" in FULL:
+        port = get_port_from_port_tree(port_tree)
+        try:
+            output_file = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
+                                       "FULL_{}_{}_{}".format(protocol,ip_address, port))
+            cmd = FULL_NMAP_CMD.format(port,protocol, output_file, ip_address)
+            if not (CACHE and os.path.exists("{}.xml".format(output_file))):
+                execute(cmd)
+            add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
+        except Exception,error:
+            print error
 def scan_ftp(ip_address, port_tree, base):
     """
     Scan for FTP protocol
@@ -586,6 +612,8 @@ def scan_ftp(ip_address, port_tree, base):
     :param base: the base directory to store the result of the scan
     :return:
     """
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "ftp"))
+    thread_full.start()
     port = get_port_from_port_tree(port_tree)
     output_file = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR), "ftp_{}_{}".
                                format(ip_address, port))
@@ -597,7 +625,7 @@ def scan_ftp(ip_address, port_tree, base):
                                  ["hydra -L USER_LIST -P PASS_LIST -f -o {} -u {} -s {} ftp".format(
                                      os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
                                                   "hydra_ftp_{}.txt".format(ip_address)), ip_address, port)])
-
+    thread_full.join()
 
 def scan_dns(ip_address, port_tree, base):
     """
@@ -607,6 +635,9 @@ def scan_dns(ip_address, port_tree, base):
      :param base: the base directory to store the result of the scan
      :return:
      """
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "dns"))
+    thread_full.start()
+    thread_full.join()
     add_suggestions_in_port_tree(port_tree,
                                  ["dnsrecon -t axfr -d {} > {}".format(ip_address, os.path.join(
                                      os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
@@ -650,16 +681,9 @@ def scan_smb(ip_address, port_tree, base):
         add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
     except Exception,error:
         print error
-
-    try:
-        output_file = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
-                                   "smb_{}_{}".format(ip_address, port))
-        cmd = NMAP_SMB_CMD.format(port, output_file, ip_address)
-        if not (CACHE and os.path.exists("{}.xml".format(output_file))):
-            execute(cmd)
-        add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
-    except Exception,error:
-        print error
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "smb"))
+    thread_full.start()
+    thread_full.join()
     out = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
                        "enum4linux_{}.txt".format(ip_address))
     add_suggestions_in_port_tree(port_tree, ["enum4linux -a {} | tee {}".format(ip_address, out)])
@@ -687,6 +711,9 @@ def scan_smtp(ip_address, port_tree, base):
         content = etree.SubElement(script_node, "elem")
         content.text = smtp_user_enum
         port_tree.append(script_node)
+        thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "smtp"))
+        thread_full.start()
+        thread_full.join()
     except:
         pass
 
@@ -708,6 +735,9 @@ def scan_snmp(ip_address, port_tree, base):
         if not (CACHE and os.path.exists("{}.xml".format(output_file))):
             execute(cmd)
         add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
+        thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "snmp"))
+        thread_full.start()
+        thread_full.join()
     except:
         pass
     out = os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR)
@@ -737,6 +767,9 @@ def scan_kerberos(ip_address, port_tree, base):
         if not (CACHE and os.path.exists("{}.xml".format(output_file))):
             execute(cmd)
         add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
+        thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "kerberos"))
+        thread_full.start()
+        thread_full.join()
     except:
         pass
 
@@ -749,6 +782,9 @@ def scan_telnet(ip_address, port_tree, base):
     :param base: the base directory to store the result of the scan
     :return:
     """
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "telnet"))
+    thread_full.start()
+    thread_full.join()
     port = get_port_from_port_tree(port_tree)
     add_suggestions_in_port_tree(port_tree,
                                  ["ncat -nv {} {} > {}".format(ip_address, port, os.path.join(
@@ -779,6 +815,9 @@ def scan_ssh(ip_address, port_tree, base):
     :param base: the base directory to store the result of the scan
     :return:
     """
+    thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "ssh"))
+    thread_full.start()
+    thread_full.join()
     port = get_port_from_port_tree(port_tree)
     output = os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR)
     add_suggestions_in_port_tree(port_tree,
@@ -1022,7 +1061,7 @@ def add_exploit_for_port(port_tree):
 
 
 def main_with_params(ips, output=".", ports=False, max_threads=5,
-                     cache=False, css=None, javascript_head=None, javascript_tail=None):
+                     cache=False,full=None, css=None, javascript_head=None, javascript_tail=None):
     """
     Aims to call the script inside an other script
     :param ips: the ip addresses string
@@ -1041,6 +1080,9 @@ def main_with_params(ips, output=".", ports=False, max_threads=5,
     CSS = css
     JAVASCRIPT_HEADER = javascript_head
     JAVASCRIPT_TAIL = javascript_tail
+    if full is not None:
+        FULL=full.spli(";")
+
     # Mains part
     threads = []
     ips_list = get_ips_from_string(ips)
@@ -1094,6 +1136,7 @@ def main_with_args(*args, **kwargs):
                         default=None)
     parser.add_argument("--cache", action='store_true', help='Use cache', dest="cache", default=False)
     parser.add_argument('-a', "--all", action='store_true', help='Scan all ports', dest="ports", default=False)
+    parser.add_argument("--full", help='Full NSE Namp scan for protocol ... (can be all|<protols separated by ";">)', dest="full", default="")
     args = parser.parse_args()
     header = args.javascript_h if hasattr(args, "javascript_h") else None
     tail = args.javascript_t if hasattr(args, "javascript_t") else None
@@ -1103,6 +1146,7 @@ def main_with_args(*args, **kwargs):
                      args.ports,
                      args.max_threads,
                      args.cache,
+                     args.full,
                      args.css,
                      header,
                      tail)
