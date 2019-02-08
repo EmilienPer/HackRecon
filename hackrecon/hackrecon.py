@@ -8,6 +8,9 @@
 #        |  |_| |_|\__,_|\___|_|\_\_| \_\___|\___\___/|_| |_| |
 #        |                                                    |
 #        ------------------------------------------------------
+# Version 1.5
+# -----------
+#   - Change SMB script command
 # Version 1.4
 # ------------
 #   - Add default CSS style
@@ -23,7 +26,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.4"
+__version__ = "1.5.3"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -72,7 +75,8 @@ NMAP_SNMP_CMD = "nmap -sV -Pn -vv -p{} --script=snmp-netstat,snmp-processes -oA 
 SMTP_CMD = "smtp-user-enum -M VRFY -U /usr/share/seclists/Usernames/top_shortlist.txt" \
            " -t {} -p {}|grep Exists"
 
-NMAP_SMB_USER_ENUM_CMD = "nmap -sV -Pn -vv -p {} --script=smb-enum-users -oA '{}' {}"
+
+NMAP_SMB_CMD = "nmap -sV -Pn -vv -p {} --script=smb-* -oA '{}' {}"
 
 NMAP_SMB_VULN_CMD = "nmap -sV -Pn -vv -p {} --script=smb-vuln* --script-args=unsafe=1 -oA '{}' {}"
 
@@ -638,23 +642,24 @@ def scan_smb(ip_address, port_tree, base):
     port = get_port_from_port_tree(port_tree)
     try:
         output_file = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
-                                   "smb_vuln_{}".format(ip_address, port))
+                                   "smb_vuln_{}_{}".format(ip_address, port))
         cmd = NMAP_SMB_VULN_CMD.format(
             port, output_file, ip_address)
         if not (CACHE and os.path.exists("{}.xml".format(output_file))):
             execute(cmd)
         add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
-    except:
-        pass
+    except Exception,error:
+        print error
+
     try:
         output_file = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
-                                   "smb_enum_user_{}_{}".format(ip_address, port))
-        cmd = NMAP_SMB_USER_ENUM_CMD.format(port, output_file, ip_address)
+                                   "smb_{}_{}".format(ip_address, port))
+        cmd = NMAP_SMB_CMD.format(port, output_file, ip_address)
         if not (CACHE and os.path.exists("{}.xml".format(output_file))):
             execute(cmd)
         add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
-    except:
-        pass
+    except Exception,error:
+        print error
     out = os.path.join(os.path.join(os.path.join(base, SCAN_DIR), SCAN_TOOLS_DIR),
                        "enum4linux_{}.txt".format(ip_address))
     add_suggestions_in_port_tree(port_tree, ["enum4linux -a {} | tee {}".format(ip_address, out)])

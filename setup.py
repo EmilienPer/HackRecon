@@ -12,7 +12,7 @@ requirements = parse_requirements("requirements.txt", session=False)
 setup(
   name = "hackrecon",
   packages = find_packages(),
-  version = "1.4",
+  version = "1.5.3",
   license = "AGPLv3",
   description = "Reconnaissance tool",
   author = "Emilien Peretti",
