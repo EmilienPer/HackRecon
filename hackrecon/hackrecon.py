@@ -29,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.6.2"
+__version__ = "1.6.3"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -1076,7 +1076,7 @@ def main_with_params(ips, output=".", ports=False, max_threads=5,
     :param javascript_tail: the javascript file to use at the end of the body of the HTMl report
     :return:
     """
-    global CACHE, CSS, JAVASCRIPT_HEADER, JAVASCRIPT_TAIL
+    global CACHE, CSS, JAVASCRIPT_HEADER, JAVASCRIPT_TAIL,FULL
     print ("The result will be stored in : {}".format(os.path.abspath(output)))
     CACHE = cache
     CSS = css
@@ -1084,7 +1084,6 @@ def main_with_params(ips, output=".", ports=False, max_threads=5,
     JAVASCRIPT_TAIL = javascript_tail
     if full is not None:
         FULL=full.split(";")
-
     # Mains part
     threads = []
     ips_list = get_ips_from_string(ips)
