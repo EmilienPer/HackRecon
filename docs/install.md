@@ -1,10 +1,10 @@
 This section explains how to install the tool
 -----
 ## System Requirements
-Discovery works with Python 2.7.
+HackRecon works with Python 2.7.
       
 !!! warning "Important Note"
-Discovery can't work correctly without the following tools
+HackRecon can't work correctly without the following tools
         - Nmap           
         - smtp-user-enum 
         - whatweb        

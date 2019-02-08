@@ -29,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.6"
+__version__ = "1.6.1"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -50,7 +50,9 @@ __examples__ = ["hackrecon 192.168.0.1 -o /root/",
                 "hackrecon 192.168.0.1;198.162.0.2 -o /root/",
                 "hackrecon 192.168.0.1 -o /root/ -t 5 --cache --all ",
                 "hackrecon 192.168.0.1 -o /root/ --javascript_header javascript_"
-                "file.js --javascript_tail other_file.js --css shett.css"
+                "file.js --javascript_tail other_file.js --css shett.css",
+                "hackrecon 192.168.0.1 -o /root/ -t 5 --full all ",
+                "hackrecon 192.168.0.1 -o /root/ -t 5 --cache --full http;ssh;smb ",
                 ]
 
 import argparse

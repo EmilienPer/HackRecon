@@ -49,6 +49,7 @@ HackRecon run on Python 2.7 can't work correctly without the following tools
 | | --css |  | |The CSS file to use into the HTML report| 
 | | --javascript_header |  | |  The javascript file to use into the header of the HTML report | 
 | | --javascript_tail |  | |  The javascript file to use into  the end of the HTML report |
+| | --full |  | |  Use all nmap nse scrip for the protocol. The value can be "all" or a list of protocol separated by ";"  |
 ## Usage
 The <ips> param can be 
 - An IPv4 address (example: 192.168.0.1)
@@ -62,6 +63,8 @@ Example:
 * `hackrecon 192.168.0.1;198.162.0.2 -o /root/`
 * `hackrecon 192.168.0.1 -o /root/ -t 5 --cache --all `
 * `hackrecon 192.168.0.1 -o /root/ --javascript_header javascript_file.js --javascript_tail other_file.js --css shett.css`
+* `hackrecon 192.168.0.1 -o /root/ -t 5 --cache --all --full all`
+* `hackrecon 192.168.0.1 -o /root/ -t 5 --cache --all  --full http;ssh;smb`
 ## Example
 Example of usage can be found in the "examples" directory
 ## Issues management 
