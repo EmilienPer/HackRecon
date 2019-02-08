@@ -17,7 +17,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -972,7 +972,7 @@ def main_with_params(ips,output=".",ports=False,max_threads=5,
     :return:
     """
     global CACHE, CSS, JAVASCRIPT_HEADER, JAVASCRIPT_TAIL
-    print ("The result will be stored in : {}".format(os.path.abspath(args.out)))
+    print ("The result will be stored in : {}".format(os.path.abspath(output)))
     CACHE = cache
     CSS = css
     JAVASCRIPT_HEADER = javascript_head

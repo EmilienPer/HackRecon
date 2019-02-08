@@ -12,7 +12,7 @@ requirements = parse_requirements("requirements.txt", session=False)
 setup(
   name = "hackrecon",
   packages = find_packages(),
-  version = "1.2.1",
+  version = "1.2.2",
   description = "Reconnaissance tool",
   author = "Emilien Peretti",
   author_email = "code@emilienperetti.be",
