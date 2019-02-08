@@ -29,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.6.1"
+__version__ = "1.6.2"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
