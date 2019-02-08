@@ -1,4 +1,5 @@
 [![PyPi](https://img.shields.io/pypi/v/hackrecon.svg)](https://pypi.org/pypi/hackrecon/)
+![License](https://img.shields.io/github/license/EmilienPer/Hackrecon.svg?style=flat)
 [![Documentation Status](https://readthedocs.org/projects/hackrecon/badge/?version=latest)](https://hackrecon.readthedocs.io/en/latest/?badge=latest)
 [![Known Vulnerabilities](https://snyk.io/test/github/EmilienPer/HackRecon/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/EmilienPer/HackRecon?targetFile=requirements.txt)
 [![Donate](https://img.shields.io/badge/donate-paypal-orange.svg)](https://www.paypal.me/EmilienPer)
