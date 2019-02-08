@@ -8,6 +8,9 @@
 #        |  |_| |_|\__,_|\___|_|\_\_| \_\___|\___\___/|_| |_| |
 #        |                                                    |
 #        ------------------------------------------------------
+# Version 1.3
+# -----------
+#   - Add extra info for port
 # Version 1.2
 # ------------
 #   - Make the script callable into an other script via main_with_params
@@ -17,7 +20,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.2.5"
+__version__ = "1.3"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -331,6 +334,7 @@ def host_tree_to_html(ip_address, host_tree, base):
             table_summary_port_head = etree.SubElement(table_summary_port, "tr")
             etree.SubElement(table_summary_port_head, "td", attrib={"class": "state title"}).text = "State"
             etree.SubElement(table_summary_port_head, "td", attrib={"class": "cpe title"}).text = "CPE"
+            etree.SubElement(table_summary_port_head, "td", attrib={"class": "extra title"}).text = "Extra Info"
             table_summary_port_body = etree.SubElement(table_summary_port, "tr")
             etree.SubElement(table_summary_port_body, "td", attrib={"class": "state"}).text = port_tree.find(
                 "state").get("state")
@@ -339,6 +343,10 @@ def host_tree_to_html(ip_address, host_tree, base):
                     "cpe").text
             except:
                 etree.SubElement(table_summary_port_body, "td", attrib={"class": "cpe"}).text = "/"
+            try:
+                etree.SubElement(table_summary_port_body, "td", attrib={"class": "extra"}).text = service.get('extrainfo')
+            except:
+                etree.SubElement(table_summary_port_body, "td", attrib={"class": "extra"}).text = "/"
             exploit_table = etree.SubElement(body, "table", attrib={"class": "exploits_table"})
             exploit_table_head = etree.SubElement(exploit_table, "tr")
             etree.SubElement(exploit_table_head, "td", attrib={"class": "exploit title"}).text = "EXPLOIT NAME"
