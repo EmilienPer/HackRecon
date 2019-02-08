@@ -29,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.6.4"
+__version__ = "1.6.5"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -162,7 +162,7 @@ def get_corresponding_port_node_in_tree(new_tree, port_tree):
     return new_tree.find("host/ports/port[@portid='{}']".format(port_tree.get("portid")))
 
 
-def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None,host_script=False):
+def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None,host_script=True):
     """
     Add all script elem in the port tree
     :param port_tree: the xml port tree
@@ -171,15 +171,21 @@ def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None,host_sc
     :return: None
     """
     if os.path.exists(xml) and os.path.getsize(xml) != 0:
-        for script in get_corresponding_port_node_in_tree(etree.parse(xml).getroot(), port_tree).findall('script'):
-            port_tree.append(script)
-            if original_cmd is not None:
-                script.set("CMD", original_cmd)
-        if host_script:
-            for script in etree.parse(xml).getroot().findall('host/hostscript/script'):
+        try:
+            for script in get_corresponding_port_node_in_tree(etree.parse(xml).getroot(), port_tree).findall('script'):
                 port_tree.append(script)
                 if original_cmd is not None:
                     script.set("CMD", original_cmd)
+        except:
+            pass
+        try:
+            if host_script:
+                for script in etree.parse(xml).getroot().findall('host/hostscript/script'):
+                    port_tree.append(script)
+                    if original_cmd is not None:
+                        script.set("CMD", original_cmd)
+        except:
+            pass
 
 
 def add_suggestions_in_port_tree(port_tree, suggestions):
