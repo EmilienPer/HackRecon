@@ -29,7 +29,7 @@
 #   - Refactoring of the code
 
 __author__ = "Emilien Peretti"
-__version__ = "1.6.3"
+__version__ = "1.6.4"
 __doc__ = """
 HackRecon was created to be used for OSP certification.                                                  
 This tool (inspired by the "reconnoitre" tool: https://github.com/codingo/Reconnoitre)  scan hosts 
@@ -162,7 +162,7 @@ def get_corresponding_port_node_in_tree(new_tree, port_tree):
     return new_tree.find("host/ports/port[@portid='{}']".format(port_tree.get("portid")))
 
 
-def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None):
+def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None,host_script=False):
     """
     Add all script elem in the port tree
     :param port_tree: the xml port tree
@@ -175,6 +175,11 @@ def add_script_into_port_from_xml_file(port_tree, xml, original_cmd=None):
             port_tree.append(script)
             if original_cmd is not None:
                 script.set("CMD", original_cmd)
+        if host_script:
+            for script in etree.parse(xml).getroot().findall('host/hostscript/script'):
+                port_tree.append(script)
+                if original_cmd is not None:
+                    script.set("CMD", original_cmd)
 
 
 def add_suggestions_in_port_tree(port_tree, suggestions):
@@ -603,7 +608,7 @@ def full_nmap_scan(ip_address, port_tree, base,protocol):
             cmd = FULL_NMAP_CMD.format(port,protocol, output_file, ip_address)
             if not (CACHE and os.path.exists("{}.xml".format(output_file))):
                 execute(cmd)
-            add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
+            add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd,host_script=True)
         except Exception,error:
             print error
 def scan_ftp(ip_address, port_tree, base):
@@ -680,7 +685,7 @@ def scan_smb(ip_address, port_tree, base):
             port, output_file, ip_address)
         if not (CACHE and os.path.exists("{}.xml".format(output_file))):
             execute(cmd)
-        add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd)
+        add_script_into_port_from_xml_file(port_tree, "{}.xml".format(output_file), cmd,host_script=True)
     except Exception,error:
         print error
     thread_full = GenericThread(function=full_nmap_scan, arguments=(ip_address, port_tree, base, "smb"))
