@@ -1083,7 +1083,7 @@ def main_with_params(ips, output=".", ports=False, max_threads=5,
     JAVASCRIPT_HEADER = javascript_head
     JAVASCRIPT_TAIL = javascript_tail
     if full is not None:
-        FULL=full.spli(";")
+        FULL=full.split(";")
 
     # Mains part
     threads = []
@@ -1139,19 +1139,24 @@ def main_with_args(*args, **kwargs):
     parser.add_argument("--cache", action='store_true', help='Use cache', dest="cache", default=False)
     parser.add_argument('-a', "--all", action='store_true', help='Scan all ports', dest="ports", default=False)
     parser.add_argument("--full", help='Full NSE Namp scan for protocol ... (can be all|<protols separated by ";">)', dest="full", default="")
+    parser.add_argument("--version", help='Display teh current version of HackRecon',
+                        action='store_true',dest="version", default=False)
     args = parser.parse_args()
-    header = args.javascript_h if hasattr(args, "javascript_h") else None
-    tail = args.javascript_t if hasattr(args, "javascript_t") else None
-    # Configuration
-    main_with_params(args.ips,
-                     args.out,
-                     args.ports,
-                     args.max_threads,
-                     args.cache,
-                     args.full,
-                     args.css,
-                     header,
-                     tail)
+    if args.version:
+        print "Version: {}".format(__version__)
+    else:
+        header = args.javascript_h if hasattr(args, "javascript_h") else None
+        tail = args.javascript_t if hasattr(args, "javascript_t") else None
+        # Configuration
+        main_with_params(args.ips,
+                         args.out,
+                         args.ports,
+                         args.max_threads,
+                         args.cache,
+                         args.full,
+                         args.css,
+                         header,
+                         tail)
 
 
 # ---------------------------------------  Main ------------------------------------------------------------------------
