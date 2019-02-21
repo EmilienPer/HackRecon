@@ -8,6 +8,9 @@
 #        |  |_| |_|\__,_|\___|_|\_\_| \_\___|\___\___/|_| |_| |
 #        |                                                    |
 #        ------------------------------------------------------
+# Version 1.7
+# -----------
+#   - Correction bug exploit
 # Version 1.6
 # ------------
 #   -Add full protocol nmap scan
@@ -27,6 +30,7 @@
 # Version 1.1
 # -------------
 #   - Refactoring of the code
+
 
 __author__ = "Emilien Peretti"
 __version__ = "1.6.5"
@@ -1037,17 +1041,23 @@ def get_exploit_for_product(product, version=None):
     """
     exploits = {}
     for line in execute("searchsploit {} --colour".format(product)).split("\n")[4:-2]:
-        name, path_to_exploit = line.split("|")
-        key = name.replace(" ", '')
-        if version is None or is_version_vulnerable_to(version, name):
-            exploits[key] = [name, path_to_exploit, None]
+        try:
+            name, path_to_exploit = line.split("|")
+            key = name.replace(" ", '')
+            if version is None or is_version_vulnerable_to(version, name):
+                exploits[key] = [name, path_to_exploit, None]
+        except:
+            pass
     for line in execute("searchsploit {} --colour -w".format(product)).split("\n")[4:-2]:
-        name, web = line.split("|")
-        key = name.replace(" ", '')
-        if key in exploits.keys():
-            exploits[key][2] = web
-        elif version is None or is_version_vulnerable_to(version, name):
-            exploits[key] = [name, None, web]
+        try:
+            name, web = line.split("|")
+            key = name.replace(" ", '')
+            if key in exploits.keys():
+                exploits[key][2] = web
+            elif version is None or is_version_vulnerable_to(version, name):
+                exploits[key] = [name, None, web]
+        except:
+            pass
     return exploits
 
 
